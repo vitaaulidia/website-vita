@@ -1,29 +1,74 @@
-/* Aturan Tambahan: Reset box-sizing di paling awal file CSS */
+/* Aturan Paling Awal: Reset box-sizing */
 * {
     box-sizing: border-box;
 }
 
-/* 1. Tag Selector: Styling dasar untuk body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     color: #333333;
-    background-color: #ffe6f2; /* Syarat 5: Background-color untuk body */
+    background-color: #ffe6f2;
     margin: 0;
     padding: 20px;
 }
 
-/* 2. Class Selector: Header Profil */
-.header-profile {
-    background-color: #ffffff; /* Syarat 5: Background-color elemen lain */
-    text-align: center;
-    padding: 25px;            /* Syarat 3: Padding */
-    margin-bottom: 20px;       /* Syarat 3: Margin */
-    border-radius: 12px;
-    border: 2px solid #ffb3d9; /* Syarat 3: Border */
+/* ==================== PENERAPAN CSS GRID (LAYOUT UTAMA) ==================== */
+.layout-container {
+    display: grid;
+    /* Menggunakan unit fr (Syarat 6) */
+    grid-template-columns: 250px 1fr;
+    /* Pemetaan Area Grid (Syarat 1) */
+    grid-template-areas: 
+        "header  header"
+        "nav     nav"
+        "sidebar content"
+        "footer  footer";
+    gap: 20px; /* Jarak antar area (Syarat 7) */
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-/* Syarat 4: Styling Teks (Header & Judul dibuat berbeda dari teks isi) */
+/* Menentukan Elemen Ke Masing-Masing Area Grid */
+.header-profile {
+    grid-area: header; /* Syarat 2 */
+}
+
+.nav-area {
+    grid-area: nav;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ffccd5;
+}
+
+.sidebar-area {
+    grid-area: sidebar; /* Syarat 3 */
+    height: fit-content;
+}
+
+.content-area {
+    grid-area: content; /* Syarat 4 */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Penggunaan Flexbox di dalam Content (Syarat 8) */
+}
+
+.footer-area {
+    grid-area: footer; /* Syarat 5 */
+}
+
+/* ==================== STYLING KOMPONEN ==================== */
+
+/* Styling Header */
+.header-profile {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #ffb3d9;
+}
+
 .header-profile h1 {
     font-family: 'Georgia', serif;
     font-size: 32px;
@@ -41,25 +86,19 @@ body {
     border: 4px solid #ff80bf;
 }
 
-/* Styling Navigasi */
-nav {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-nav a {
+/* Styling Navigasi Links */
+.nav-area a {
     color: #d63384;
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
 }
 
-/* 3. Class Selector: Kartu Konten & Section */
+/* Styling Kartu / Card */
 .card {
     background-color: #ffffff;
-    padding: 20px;            /* Syarat 3: Padding agar tidak menempel ke tepi */
-    margin-bottom: 20px;       /* Syarat 3: Margin antar section */
-    border: 1px solid #ffccd5; /* Syarat 3: Border */
+    padding: 20px;
+    border: 1px solid #ffccd5;
     border-radius: 10px;
 }
 
@@ -69,6 +108,7 @@ nav a {
     color: #c2185b;
     border-bottom: 2px solid #ffe6f2;
     padding-bottom: 8px;
+    margin-top: 0;
 }
 
 /* Styling Tabel */
@@ -93,7 +133,7 @@ nav a {
 /* Styling Multimedia */
 .media-player {
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     margin-bottom: 15px;
     border-radius: 8px;
 }
@@ -128,22 +168,22 @@ nav a {
     cursor: pointer;
 }
 
-/* 4. ID Selector: Styling Footer */
-#kontak {
+/* Styling Footer */
+.footer-area {
     background-color: #ffffff;
     text-align: center;
     padding: 15px;
-    margin-top: 30px;
     border-radius: 10px;
     border: 1px solid #ffccd5;
 }
 
-#kontak h2 {
+.footer-area h2 {
     font-size: 20px;
     color: #c2185b;
+    margin-top: 0;
 }
 
-#kontak a {
+.footer-area a {
     color: #d63384;
     font-weight: bold;
 }
